@@ -1,0 +1,13 @@
+C:\Git\Keithley2461\obj\Debug\Keithley2461.csprojAssemblyReference.cache
+C:\Git\Keithley2461\obj\Debug\Keithley2461.frmMain.resources
+C:\Git\Keithley2461\obj\Debug\Keithley2461.Properties.Resources.resources
+C:\Git\Keithley2461\obj\Debug\Keithley2461.csproj.GenerateResource.cache
+C:\Git\Keithley2461\obj\Debug\Keithley2461.csproj.CoreCompileInputs.cache
+C:\Git\Keithley2461\bin\Debug\Keithley2461.exe.config
+C:\Git\Keithley2461\bin\Debug\Keithley2461.exe
+C:\Git\Keithley2461\bin\Debug\Keithley2461.pdb
+C:\Git\Keithley2461\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Git\Keithley2461\bin\Debug\NationalInstruments.VisaNS.xml
+C:\Git\Keithley2461\obj\Debug\Keithley2461.csproj.CopyComplete
+C:\Git\Keithley2461\obj\Debug\Keithley2461.exe
+C:\Git\Keithley2461\obj\Debug\Keithley2461.pdb
