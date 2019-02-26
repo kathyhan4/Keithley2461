@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -97,7 +96,6 @@
             this.radSingleStrip = new System.Windows.Forms.RadioButton();
             this.radFullCell = new System.Windows.Forms.RadioButton();
             this.chtIVCurve = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tmrRunSweep = new System.Windows.Forms.Timer(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtIVCurve)).BeginInit();
@@ -715,11 +713,6 @@
             this.chtIVCurve.TabIndex = 116;
             this.chtIVCurve.Text = "chart1";
             // 
-            // tmrRunSweep
-            // 
-            this.tmrRunSweep.Interval = 500;
-            this.tmrRunSweep.Tick += new System.EventHandler(this.tmrRunSweep_Tick);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -862,7 +855,6 @@
         private System.Windows.Forms.RadioButton radSingleStrip;
         private System.Windows.Forms.RadioButton radFullCell;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtIVCurve;
-        private System.Windows.Forms.Timer tmrRunSweep;
     }
 }
 

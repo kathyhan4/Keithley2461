@@ -30,28 +30,21 @@ namespace Keithley2461
             var visa = new NationalInstruments.VisaNS.MessageBasedSession(resourceName);
 
 
+            //Disable the runs sweep button
+            btnRunSweep.Enabled = false;
+
+
+            //Writes the settings to run sweep
             visa.Write("localnode.prompts = localnode.DISABLE");
-            visa.Write("print(localnode.serialno)");
-            string res = visa.ReadString(); // read from instrument
-            Console.WriteLine(res);
-
-            lblIDN.Text = res;
-
             visa.Write("local currentLevel = 10");
-            visa.Write("print (currentLevel)");
-            string debug2 = visa.ReadString(); // read from instrument
-
             visa.Write("local vLimit = 2"); //+ txtBiasLimit.Text);
             visa.Write("local vPulseLimit = 100"); // + txtLimitValue.Text);
             visa.Write("local pulseWidth = 0.001"); // + txtPulseWidth.Text);
             visa.Write("local pulsePeriod = 0.05");
             visa.Write("local point = 21"); // + txtNumberPulses.Text);
-
             visa.Write("reset()");
             visa.Write("eventlog.clear()");
             visa.Write("defbuffer1.clear()");
-            //visa.Write("configListName = \"CurrPulse\"");
-
             visa.Write("vLimit = 2"); // + txtBiasVoltage.Text);
             visa.Write("bias_level = " + txtBiasVoltage.Text);
             visa.Write("start = " + txtStartValue.Text);
@@ -60,7 +53,6 @@ namespace Keithley2461
             visa.Write("pw = 0.00091");
             visa.Write("offTime = " + txtOffTime.Text);
             visa.Write("sdly = " + txtDelay.Text);
-
             if (radCurrentSweep.Checked == true)
             {
                 sourcename = "FUNC_DC_CURRENT";
@@ -78,7 +70,6 @@ namespace Keithley2461
             visa.Write("smu.source.readback = smu.OFF");
             visa.Write("smu.source.autodelay = smu.OFF");
             visa.Write("smu.source.vlimit.level = 100"); //+ txtLimitValue.Text);
-
             visa.Write("if eventlog.getcount() > 0 then exit() end");
             visa.Write("smu.measure.func = smu.FUNC_DC_VOLTAGE");// + measurename);
             visa.Write("smu.measure.autorange = smu.OFF");
@@ -87,14 +78,6 @@ namespace Keithley2461
             visa.Write("smu.measure.sense = smu.SENSE_4WIRE");
             visa.Write("smu.measure.terminals = smu.TERMINALS_FRONT");
             visa.Write("smu.measure.autozero.enable = smu.OFF");
-
-            //visa.Write("if eventlog.getcount(eventlog.SEV_WARN | eventlog.SEV_ERROR) > 0 then print(\"error with source / measure set up\") exit() end");
-
-
-            visa.Write("print (vLimit)");
-            string debug1 = visa.ReadString(); // read from instrument
-            Console.WriteLine(debug1);
-
             //visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\"," + txtBiasVoltage.Text + "," + txtStartValue.Text +
             //    "," + txtStopValue.Text + "," + txtNumberPulses.Text + "," + txtPulseWidth.Text + "," + "smu.ON, " +
             //    "defbuffer1," + txtDelay.Text + "," + 
@@ -103,38 +86,19 @@ namespace Keithley2461
             //    "sdly, offTime, 1, vLimit, vPulseLimit, smu.OFF, smu.OFF)");
             visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\", 0, 0, 10, 21, 0.00091, smu.ON, defbuffer1, " +
                 "0, 0.1, 1, 2, 100, smu.OFF, smu.OFF)");
-
             visa.Write("if eventlog.getcount(eventlog.SEV_WARN | eventlog.SEV_ERROR) > 0 then print(\"error with pulse api\") exit() end");
             visa.Write("trigger.model.initiate()");
-            Console.WriteLine("step 0");
             visa.Write("waitcomplete()");
             visa.Write("printbuffer(1, 21, defbuffer1.sourcevalues, defbuffer1.readings)");
 
-            Console.WriteLine("step 3");
 
-            //System.Threading.Thread.Sleep(500);
-
-
-            if (tmrRunSweep.Enabled == false)
-            {
-                tmrRunSweep.Enabled = true;
-            }
-        }
-
-        private void tmrRunSweep_Tick(object sender, EventArgs e)
-        {
-            string resourceName = "USB0::0x05E6::0x2461::04403896::INSTR"; // See NI MAX for resource name
-            string sourcename = "";
-            string measurename = "";
-            var visa = new NationalInstruments.VisaNS.MessageBasedSession(resourceName);
-
-            Console.WriteLine("step 6");
+            Console.WriteLine("Printing Data");
+            visa.Timeout = 4000;
             string data5 = visa.ReadString();
             Console.WriteLine(data5);
             visa.Write("prompting = localnode.ENABLE");
 
-            //Disables the one time timer
-            tmrRunSweep.Enabled = false;
+            btnRunSweep.Enabled = true;
         }
     }
 }
