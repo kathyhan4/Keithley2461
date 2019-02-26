@@ -699,15 +699,16 @@
             // 
             // chtIVCurve
             // 
-            chartArea1.Name = "ChartArea1";
+            chartArea1.Name = "chtIVCurve";
             this.chtIVCurve.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chtIVCurve.Legends.Add(legend1);
             this.chtIVCurve.Location = new System.Drawing.Point(571, 131);
             this.chtIVCurve.Name = "chtIVCurve";
-            series1.ChartArea = "ChartArea1";
+            series1.ChartArea = "chtIVCurve";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "serIV";
             this.chtIVCurve.Series.Add(series1);
             this.chtIVCurve.Size = new System.Drawing.Size(371, 269);
             this.chtIVCurve.TabIndex = 116;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NumSharp.Core;
 
 namespace Keithley2461
 {
@@ -91,14 +92,37 @@ namespace Keithley2461
             visa.Write("waitcomplete()");
             visa.Write("printbuffer(1, 21, defbuffer1.sourcevalues, defbuffer1.readings)");
 
-
+            //Reads the data back
             Console.WriteLine("Printing Data");
             visa.Timeout = 4000;
             string data5 = visa.ReadString();
             Console.WriteLine(data5);
             visa.Write("prompting = localnode.ENABLE");
 
+            //Enables the sweep button again
             btnRunSweep.Enabled = true;
+
+
+            //Playground
+
+            Random rdn = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                chtIVCurve.Series["serIV"].Points.AddXY
+                                (rdn.Next(0, 10), rdn.Next(0, 10));
+            }
+
+            // create a vector
+            var nd = np.arange(12);
+
+            // create a matrix
+            nd = np.arange(12).reshape(3, 4);
+
+            // access data by index
+            var data = nd[1, 1];
+
+            // create a tensor
+            nd = np.arange(12).reshape(2, 3, 2);
         }
     }
 }
