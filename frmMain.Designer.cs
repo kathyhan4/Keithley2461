@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblIDN = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnReDoAnalysis = new System.Windows.Forms.Button();
@@ -96,6 +97,7 @@
             this.radSingleStrip = new System.Windows.Forms.RadioButton();
             this.radFullCell = new System.Windows.Forms.RadioButton();
             this.chtIVCurve = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tmrRunSweep = new System.Windows.Forms.Timer(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtIVCurve)).BeginInit();
@@ -699,19 +701,24 @@
             // 
             // chtIVCurve
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtIVCurve.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtIVCurve.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chtIVCurve.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtIVCurve.Legends.Add(legend1);
             this.chtIVCurve.Location = new System.Drawing.Point(571, 131);
             this.chtIVCurve.Name = "chtIVCurve";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtIVCurve.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtIVCurve.Series.Add(series1);
             this.chtIVCurve.Size = new System.Drawing.Size(371, 269);
             this.chtIVCurve.TabIndex = 116;
             this.chtIVCurve.Text = "chart1";
+            // 
+            // tmrRunSweep
+            // 
+            this.tmrRunSweep.Interval = 500;
+            this.tmrRunSweep.Tick += new System.EventHandler(this.tmrRunSweep_Tick);
             // 
             // frmMain
             // 
@@ -855,6 +862,7 @@
         private System.Windows.Forms.RadioButton radSingleStrip;
         private System.Windows.Forms.RadioButton radFullCell;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtIVCurve;
+        private System.Windows.Forms.Timer tmrRunSweep;
     }
 }
 

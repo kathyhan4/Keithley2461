@@ -29,25 +29,17 @@ namespace Keithley2461
             string measurename = "";
             var visa = new NationalInstruments.VisaNS.MessageBasedSession(resourceName);
 
-            //string debug3 = visa.ReadString();
-            //Console.WriteLine(debug3);
 
             visa.Write("localnode.prompts = localnode.DISABLE");
-            //visa.Write("*IDN?"); // write to instrument
             visa.Write("print(localnode.serialno)");
             string res = visa.ReadString(); // read from instrument
             Console.WriteLine(res);
 
             lblIDN.Text = res;
 
-
             visa.Write("local currentLevel = 10");
-            Console.WriteLine("testing1");
             visa.Write("print (currentLevel)");
             string debug2 = visa.ReadString(); // read from instrument
-            Console.WriteLine(debug2);
-
-            Console.WriteLine("testing2");
 
             visa.Write("local vLimit = 2"); //+ txtBiasLimit.Text);
             visa.Write("local vPulseLimit = 100"); // + txtLimitValue.Text);
@@ -115,54 +107,34 @@ namespace Keithley2461
             visa.Write("if eventlog.getcount(eventlog.SEV_WARN | eventlog.SEV_ERROR) > 0 then print(\"error with pulse api\") exit() end");
             visa.Write("trigger.model.initiate()");
             Console.WriteLine("step 0");
-            //System.Threading.Thread.Sleep(3000);
-
             visa.Write("waitcomplete()");
-            //visa.Write("if eventlog.getcount(eventlog.SEV_WARN | eventlog.SEV_ERROR) > 0 then print(\"error during trigger model execution\") exit() end");
-
-            //for (int i = 1; i == Convert.ToInt32(txtNumberPulses.Text); i++)
-            //{
-            //    visa.Write("print(\"Pt \","+i.ToString()+ ", \"val(V)\",  defbuffer1[" + i.ToString() + "], \"source(A)\", " +
-            //        "defbuffer1.sourcevalues[" + i.ToString() + "])");
-            //    System.Threading.Thread.Sleep(10);
-            //    string data = visa.ReadString(); // read from instrument
-            //    Console.WriteLine(data);
-            //}
-
-            //visa.Write("smu.read(defbuffer1)");
-            //visa.Write("for i = 1, defbuffer1.n do");
-            //visa.Write("print(defbuffer1.relativetimestamps[i], defbuffer1[i])");
-            //visa.Write("end");
-            //visa.Write("smu.source.output = smu.OFF");
-
-            //Console.WriteLine("step 1");
-            System.Threading.Thread.Sleep(2000);
-            //Console.WriteLine("step 2");
             visa.Write("printbuffer(1, 21, defbuffer1.sourcevalues, defbuffer1.readings)");
 
-            //visa.Write("for i = 1, points do ");
-            //visa.Write("print(\"Pt \",i, \"val(V)\",  defbuffer1[i], \"source(A)\", defbuffer1.sourcevalues[i])");
-            //visa.Write("end");
-
             Console.WriteLine("step 3");
-            System.Threading.Thread.Sleep(2000);
-            Console.WriteLine("step 4");
-            //for (int i = 1; i == Convert.ToInt32(txtNumberPulses.Text); i++)
-            //{
-            //    string data1 = visa.ReadString();
-            //    Console.WriteLine(data1);
-            //}
-            Console.WriteLine("step 5");
-            //System.Threading.Thread.Sleep(2000);
+
+            //System.Threading.Thread.Sleep(500);
+
+
+            if (tmrRunSweep.Enabled == false)
+            {
+                tmrRunSweep.Enabled = true;
+            }
+        }
+
+        private void tmrRunSweep_Tick(object sender, EventArgs e)
+        {
+            string resourceName = "USB0::0x05E6::0x2461::04403896::INSTR"; // See NI MAX for resource name
+            string sourcename = "";
+            string measurename = "";
+            var visa = new NationalInstruments.VisaNS.MessageBasedSession(resourceName);
+
             Console.WriteLine("step 6");
-            // "+ txtNumberPulses.Text+"
             string data5 = visa.ReadString();
             Console.WriteLine(data5);
-
-            //visa.Write("printbuffer(1," + txtNumberPulses.Text + ", defbuffer1.sourcevalues, defbuffer1.readings)");
-            //visa.Write("print(\"Pt\", i, \"val (V)\", defbuffer1[i], \"source (A)\", defbuffer1.sourcevalues[i])");
-
             visa.Write("prompting = localnode.ENABLE");
+
+            //Disables the one time timer
+            tmrRunSweep.Enabled = false;
         }
     }
 }
