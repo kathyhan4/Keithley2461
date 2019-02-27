@@ -95,8 +95,8 @@ namespace Keithley2461
             //Reads the data back
             Console.WriteLine("Printing Data");
             visa.Timeout = 4000;
-            string data5 = visa.ReadString();
-            Console.WriteLine(data5);
+            string strIVData = visa.ReadString();
+            Console.WriteLine(strIVData);
             visa.Write("prompting = localnode.ENABLE");
 
             //Enables the sweep button again
@@ -105,24 +105,33 @@ namespace Keithley2461
 
             //Playground
 
-            Random rdn = new Random();
-            for (int i = 0; i < 50; i++)
+            
+
+            //Splits the IV curve into an array
+            string[] arrIVData = strIVData.Split(',');
+
+            //Finds the number of IV entires in the data
+            int intNumberOfEntries = arrIVData.Length / 2;
+
+            //Creates the IV curve array
+            var npIVCurve = np.zeros(2, intNumberOfEntries+1);
+
+            //Loops through the string, parsing the data as we go along
+            for (int i = 0; i < intNumberOfEntries; i++)
             {
-                chtIVCurve.Series["serIV"].Points.AddXY
-                                (rdn.Next(0, 10), rdn.Next(0, 10));
+                //Fills in the current
+                npIVCurve[1, i] = Convert.ToDouble(arrIVData[i*2]);
+
+                //Fills in the voltage
+                npIVCurve[2, i] = Convert.ToDouble(arrIVData[i*2+1]);
             }
 
-            // create a vector
-            var nd = np.arange(12);
+            //Plots the IV curve data
+            for (int i = 0; i < intNumberOfEntries; i++)
+            {
+                chtIVCurve.Series["serIV"].Points.AddXY(npIVCurve[2, i], npIVCurve[1, i]);
+            }
 
-            // create a matrix
-            nd = np.arange(12).reshape(3, 4);
-
-            // access data by index
-            var data = nd[1, 1];
-
-            // create a tensor
-            nd = np.arange(12).reshape(2, 3, 2);
         }
     }
 }
