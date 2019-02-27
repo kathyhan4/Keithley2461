@@ -104,7 +104,7 @@
             // lblIDN
             // 
             this.lblIDN.AutoSize = true;
-            this.lblIDN.Location = new System.Drawing.Point(558, 494);
+            this.lblIDN.Location = new System.Drawing.Point(281, 522);
             this.lblIDN.Name = "lblIDN";
             this.lblIDN.Size = new System.Drawing.Size(43, 17);
             this.lblIDN.TabIndex = 115;
@@ -113,7 +113,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(558, 472);
+            this.label32.Location = new System.Drawing.Point(281, 500);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(119, 17);
             this.label32.TabIndex = 114;
@@ -121,9 +121,9 @@
             // 
             // btnReDoAnalysis
             // 
-            this.btnReDoAnalysis.Location = new System.Drawing.Point(712, 417);
+            this.btnReDoAnalysis.Location = new System.Drawing.Point(824, 28);
             this.btnReDoAnalysis.Name = "btnReDoAnalysis";
-            this.btnReDoAnalysis.Size = new System.Drawing.Size(159, 55);
+            this.btnReDoAnalysis.Size = new System.Drawing.Size(185, 78);
             this.btnReDoAnalysis.TabIndex = 113;
             this.btnReDoAnalysis.Text = " Re-Do Analysis";
             this.btnReDoAnalysis.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             // btnRunSweep
             // 
             this.btnRunSweep.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.btnRunSweep.Location = new System.Drawing.Point(695, 39);
+            this.btnRunSweep.Location = new System.Drawing.Point(571, 29);
             this.btnRunSweep.Name = "btnRunSweep";
             this.btnRunSweep.Size = new System.Drawing.Size(247, 77);
             this.btnRunSweep.TabIndex = 112;
@@ -710,7 +710,7 @@
             series1.Legend = "Legend1";
             series1.Name = "serIV";
             this.chtIVCurve.Series.Add(series1);
-            this.chtIVCurve.Size = new System.Drawing.Size(371, 269);
+            this.chtIVCurve.Size = new System.Drawing.Size(610, 397);
             this.chtIVCurve.TabIndex = 116;
             this.chtIVCurve.Text = "chart1";
             // 
@@ -718,7 +718,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 523);
+            this.ClientSize = new System.Drawing.Size(1193, 540);
             this.Controls.Add(this.chtIVCurve);
             this.Controls.Add(this.lblIDN);
             this.Controls.Add(this.label32);

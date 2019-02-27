@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NumSharp.Core;
+
 
 namespace Keithley2461
 {
@@ -25,6 +27,9 @@ namespace Keithley2461
 
         private void btnRunSweep_Click(object sender, EventArgs e)
         {
+            //=====================================
+            //Performs sweep and gets data back
+            //=====================================
             string resourceName = "USB0::0x05E6::0x2461::04403896::INSTR"; // See NI MAX for resource name
             string sourcename = "";
             string measurename = "";
@@ -103,9 +108,9 @@ namespace Keithley2461
             btnRunSweep.Enabled = true;
 
 
-            //Playground
-
-            
+            //=====================================
+            //Plots the graph
+            //=====================================           
 
             //Splits the IV curve into an array
             string[] arrIVData = strIVData.Split(',');
@@ -132,6 +137,32 @@ namespace Keithley2461
                 chtIVCurve.Series["serIV"].Points.AddXY(npIVCurve[2, i], npIVCurve[1, i]);
             }
 
+            //Formats the X axis so that we only have a sane number of digits
+            chtIVCurve.ChartAreas[0].AxisX.LabelStyle.Format = "#";
+
+            //=====================================
+            //Export to CSV and JPG
+            //=====================================
+
+            //Exports file to CSV
+            var csv = new StringBuilder();
+
+            //Writes the title of the IV curve data
+            var firstLine = string.Format("{0},{1}", "Voltage[V]", "Current [i]");
+            csv.AppendLine(firstLine);
+
+            //Writes the IV curve data
+            for (int i = 0; i < intNumberOfEntries; i++)
+            {
+                var newLine = string.Format("{0},{1}", npIVCurve[2, i], npIVCurve[1, i]);
+                csv.AppendLine(newLine);
+            }       
+
+            //Writes the CSV files
+            File.WriteAllText(@"C:\temp\test.csv", csv.ToString());
+
+            //Exports JPG
+            chtIVCurve.SaveImage(@"C:\temp\test.jpg", System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
         }
     }
 }
