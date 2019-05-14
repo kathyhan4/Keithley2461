@@ -42,22 +42,22 @@ namespace Keithley2461
 
             //Writes the settings to run sweep
             visa.Write("localnode.prompts = localnode.DISABLE");
-            visa.Write("local currentLevel = 10");
-            visa.Write("local vLimit = 2"); //+ txtBiasLimit.Text);
-            visa.Write("local vPulseLimit = 100"); // + txtLimitValue.Text);
-            visa.Write("local pulseWidth = 0.001"); // + txtPulseWidth.Text);
-            visa.Write("local pulsePeriod = 0.05");
-            visa.Write("local point = 21"); // + txtNumberPulses.Text);
+            visa.Write("currentLevel = 10");
+            visa.Write("vLimit = 2"); //+ txtBiasLimit.Text);
+            visa.Write("vPulseLimit = 100"); // + txtLimitValue.Text);
+            visa.Write("pulseWidth = " + txtPulseWidth.Text);
+            visa.Write("pulsePeriod = 0.05");
+            visa.Write("point = "+txtNumberPulses.Text);
             visa.Write("reset()");
             visa.Write("eventlog.clear()");
             visa.Write("defbuffer1.clear()");
             visa.Write("vLimit = 2"); // + txtBiasVoltage.Text);
             visa.Write("bias_level = " + txtBiasVoltage.Text);
-            visa.Write("start = " + txtStartValue.Text);
-            visa.Write("stop = " + txtStopValue.Text);
-            visa.Write("points = " + txtNumberPulses.Text);
+            visa.Write("start = "+txtStartValue.Text);
+            visa.Write("stop = "+txtStopValue.Text);
+            visa.Write("points = "+txtNumberPulses.Text);
             visa.Write("pw = 0.00091");
-            visa.Write("offTime = " + txtOffTime.Text);
+            visa.Write("offTime = "+txtOffTime.Text);
             visa.Write("sdly = " + txtDelay.Text);
             if (radCurrentSweep.Checked == true)
             {
@@ -88,18 +88,19 @@ namespace Keithley2461
             //    "," + txtStopValue.Text + "," + txtNumberPulses.Text + "," + txtPulseWidth.Text + "," + "smu.ON, " +
             //    "defbuffer1," + txtDelay.Text + "," + 
             //    txtOffTime.Text + ",1,"+ txtBiasLimit.Text + "," + txtLimitValue.Text + ",smu.OFF,smu.OFF)");
-            //visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\", bias_level, start, stop, points, pw, smu.ON, defbuffer1, " +
-            //    "sdly, offTime, 1, vLimit, vPulseLimit, smu.OFF, smu.OFF)");
-            visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\", 0, 0, 10, 21, 0.00091, smu.ON, defbuffer1, " +
-                "0, 0.1, 1, 2, 100, smu.OFF, smu.OFF)");
+            visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\", bias_level, start, stop, points, pw, smu.ON, defbuffer1, " +
+                "sdly, offTime, 1, vLimit, vPulseLimit, smu.OFF, smu.OFF)");
+            //visa.Write("smu.source.pulsesweeplinear(\"CurrPulse\", 0, 0, 10, 21, 0.00091, smu.ON, defbuffer1, " +
+            //    "0, 0.1, 1, 2, 100, smu.OFF, smu.OFF)");
             visa.Write("if eventlog.getcount(eventlog.SEV_WARN | eventlog.SEV_ERROR) > 0 then print(\"error with pulse api\") exit() end");
             visa.Write("trigger.model.initiate()");
             visa.Write("waitcomplete()");
-            visa.Write("printbuffer(1, 21, defbuffer1.sourcevalues, defbuffer1.readings)");
+            visa.Write("printbuffer(1, points, defbuffer1.sourcevalues, defbuffer1.readings)");
 
             //Reads the data back
             Console.WriteLine("Printing Data");
-            visa.Timeout = 4000;
+            int visatimeout = int.Parse(txtTimeOut.Text);
+            visa.Timeout = visatimeout;
             string strIVData = visa.ReadString();
             Console.WriteLine(strIVData);
             visa.Write("prompting = localnode.ENABLE");
@@ -159,10 +160,20 @@ namespace Keithley2461
             }       
 
             //Writes the CSV files
-            File.WriteAllText(@"C:\temp\test.csv", csv.ToString());
+            File.WriteAllText(txtFilePath.Text + txtSampleName.Text+".csv", csv.ToString());
 
             //Exports JPG
-            chtIVCurve.SaveImage(@"C:\temp\test.jpg", System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
+            chtIVCurve.SaveImage(txtFilePath.Text + txtSampleName.Text + ".jpg", System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

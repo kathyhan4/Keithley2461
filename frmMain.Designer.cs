@@ -96,6 +96,13 @@
             this.radSingleStrip = new System.Windows.Forms.RadioButton();
             this.radFullCell = new System.Windows.Forms.RadioButton();
             this.chtIVCurve = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSampleName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txtTimeOut = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtIVCurve)).BeginInit();
@@ -121,9 +128,9 @@
             // 
             // btnReDoAnalysis
             // 
-            this.btnReDoAnalysis.Location = new System.Drawing.Point(824, 28);
+            this.btnReDoAnalysis.Location = new System.Drawing.Point(824, 77);
             this.btnReDoAnalysis.Name = "btnReDoAnalysis";
-            this.btnReDoAnalysis.Size = new System.Drawing.Size(185, 78);
+            this.btnReDoAnalysis.Size = new System.Drawing.Size(203, 58);
             this.btnReDoAnalysis.TabIndex = 113;
             this.btnReDoAnalysis.Text = " Re-Do Analysis";
             this.btnReDoAnalysis.UseVisualStyleBackColor = true;
@@ -131,9 +138,9 @@
             // btnRunSweep
             // 
             this.btnRunSweep.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.btnRunSweep.Location = new System.Drawing.Point(571, 29);
+            this.btnRunSweep.Location = new System.Drawing.Point(571, 77);
             this.btnRunSweep.Name = "btnRunSweep";
-            this.btnRunSweep.Size = new System.Drawing.Size(247, 77);
+            this.btnRunSweep.Size = new System.Drawing.Size(233, 58);
             this.btnRunSweep.TabIndex = 112;
             this.btnRunSweep.Text = "Run Sweep";
             this.btnRunSweep.UseVisualStyleBackColor = true;
@@ -358,7 +365,7 @@
             this.txtStartValue.Name = "txtStartValue";
             this.txtStartValue.Size = new System.Drawing.Size(37, 22);
             this.txtStartValue.TabIndex = 87;
-            this.txtStartValue.Text = "0.2";
+            this.txtStartValue.Text = "0";
             // 
             // txtStopValue
             // 
@@ -366,7 +373,7 @@
             this.txtStopValue.Name = "txtStopValue";
             this.txtStopValue.Size = new System.Drawing.Size(37, 22);
             this.txtStopValue.TabIndex = 86;
-            this.txtStopValue.Text = "2";
+            this.txtStopValue.Text = "5";
             // 
             // txtNumberPulses
             // 
@@ -703,7 +710,7 @@
             this.chtIVCurve.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chtIVCurve.Legends.Add(legend1);
-            this.chtIVCurve.Location = new System.Drawing.Point(571, 131);
+            this.chtIVCurve.Location = new System.Drawing.Point(571, 160);
             this.chtIVCurve.Name = "chtIVCurve";
             series1.ChartArea = "chtIVCurve";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -714,11 +721,80 @@
             this.chtIVCurve.TabIndex = 116;
             this.chtIVCurve.Text = "chart1";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(568, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(145, 17);
+            this.label2.TabIndex = 117;
+            this.label2.Text = "Unique sample name:";
+            // 
+            // txtSampleName
+            // 
+            this.txtSampleName.Location = new System.Drawing.Point(719, 17);
+            this.txtSampleName.Name = "txtSampleName";
+            this.txtSampleName.Size = new System.Drawing.Size(346, 22);
+            this.txtSampleName.TabIndex = 118;
+            this.txtSampleName.Text = "Sample";
+            this.txtSampleName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(568, 49);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(66, 17);
+            this.label27.TabIndex = 119;
+            this.label27.Text = "File path:";
+            // 
+            // txtFilePath
+            // 
+            this.txtFilePath.Location = new System.Drawing.Point(640, 49);
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(425, 22);
+            this.txtFilePath.TabIndex = 120;
+            this.txtFilePath.Text = "C:\\temp\\";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(67, 506);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(59, 17);
+            this.label28.TabIndex = 121;
+            this.label28.Text = "Timeout";
+            // 
+            // txtTimeOut
+            // 
+            this.txtTimeOut.Location = new System.Drawing.Point(134, 506);
+            this.txtTimeOut.Name = "txtTimeOut";
+            this.txtTimeOut.Size = new System.Drawing.Size(58, 22);
+            this.txtTimeOut.TabIndex = 122;
+            this.txtTimeOut.Text = "4000";
+            this.txtTimeOut.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(198, 509);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(26, 17);
+            this.label29.TabIndex = 123;
+            this.label29.Text = "ms";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1193, 540);
+            this.ClientSize = new System.Drawing.Size(1193, 569);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.txtTimeOut);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.txtFilePath);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.txtSampleName);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chtIVCurve);
             this.Controls.Add(this.lblIDN);
             this.Controls.Add(this.label32);
@@ -856,6 +932,13 @@
         private System.Windows.Forms.RadioButton radSingleStrip;
         private System.Windows.Forms.RadioButton radFullCell;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtIVCurve;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtSampleName;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox txtTimeOut;
+        private System.Windows.Forms.Label label29;
     }
 }
 
