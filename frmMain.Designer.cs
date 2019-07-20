@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblIDN = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnReDoAnalysis = new System.Windows.Forms.Button();
@@ -103,6 +102,10 @@
             this.label28 = new System.Windows.Forms.Label();
             this.txtTimeOut = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.lblnCells = new System.Windows.Forms.Label();
+            this.txtNCells = new System.Windows.Forms.TextBox();
+            this.lblTemp = new System.Windows.Forms.Label();
+            this.txtTemp = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtIVCurve)).BeginInit();
@@ -263,7 +266,8 @@
             this.txtRsCalculateHigh.Name = "txtRsCalculateHigh";
             this.txtRsCalculateHigh.Size = new System.Drawing.Size(37, 22);
             this.txtRsCalculateHigh.TabIndex = 99;
-            this.txtRsCalculateHigh.Text = "0";
+            this.txtRsCalculateHigh.Text = "4.8";
+            this.txtRsCalculateHigh.TextChanged += new System.EventHandler(this.txtRsCalculateHigh_TextChanged);
             // 
             // txtRshCalculateLow
             // 
@@ -287,7 +291,7 @@
             this.txtRsCalculateLow.Name = "txtRsCalculateLow";
             this.txtRsCalculateLow.Size = new System.Drawing.Size(37, 22);
             this.txtRsCalculateLow.TabIndex = 96;
-            this.txtRsCalculateLow.Text = "0";
+            this.txtRsCalculateLow.Text = "4";
             // 
             // label22
             // 
@@ -712,11 +716,6 @@
             this.chtIVCurve.Legends.Add(legend1);
             this.chtIVCurve.Location = new System.Drawing.Point(571, 160);
             this.chtIVCurve.Name = "chtIVCurve";
-            series1.ChartArea = "chtIVCurve";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Legend = "Legend1";
-            series1.Name = "serIV";
-            this.chtIVCurve.Series.Add(series1);
             this.chtIVCurve.Size = new System.Drawing.Size(610, 397);
             this.chtIVCurve.TabIndex = 116;
             this.chtIVCurve.Text = "chart1";
@@ -783,11 +782,50 @@
             this.label29.TabIndex = 123;
             this.label29.Text = "ms";
             // 
+            // lblnCells
+            // 
+            this.lblnCells.AutoSize = true;
+            this.lblnCells.Location = new System.Drawing.Point(80, 543);
+            this.lblnCells.Name = "lblnCells";
+            this.lblnCells.Size = new System.Drawing.Size(46, 17);
+            this.lblnCells.TabIndex = 124;
+            this.lblnCells.Text = "nCells";
+            this.lblnCells.Click += new System.EventHandler(this.label30_Click);
+            // 
+            // txtNCells
+            // 
+            this.txtNCells.Location = new System.Drawing.Point(132, 540);
+            this.txtNCells.Name = "txtNCells";
+            this.txtNCells.Size = new System.Drawing.Size(100, 22);
+            this.txtNCells.TabIndex = 125;
+            this.txtNCells.Text = "1";
+            // 
+            // lblTemp
+            // 
+            this.lblTemp.AutoSize = true;
+            this.lblTemp.Location = new System.Drawing.Point(280, 545);
+            this.lblTemp.Name = "lblTemp";
+            this.lblTemp.Size = new System.Drawing.Size(113, 17);
+            this.lblTemp.TabIndex = 126;
+            this.lblTemp.Text = "Temperature (C)";
+            // 
+            // txtTemp
+            // 
+            this.txtTemp.Location = new System.Drawing.Point(400, 543);
+            this.txtTemp.Name = "txtTemp";
+            this.txtTemp.Size = new System.Drawing.Size(100, 22);
+            this.txtTemp.TabIndex = 127;
+            this.txtTemp.Text = "25";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1193, 569);
+            this.Controls.Add(this.txtTemp);
+            this.Controls.Add(this.lblTemp);
+            this.Controls.Add(this.txtNCells);
+            this.Controls.Add(this.lblnCells);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.txtTimeOut);
             this.Controls.Add(this.label28);
@@ -939,6 +977,10 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtTimeOut;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lblnCells;
+        private System.Windows.Forms.TextBox txtNCells;
+        private System.Windows.Forms.Label lblTemp;
+        private System.Windows.Forms.TextBox txtTemp;
     }
 }
 
