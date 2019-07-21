@@ -16,6 +16,8 @@ namespace Keithley2461
     public partial class frmMain : Form
     {
         public int intChart = 1;
+        public NDArray arrData;
+        public int intNumberOfEntries;
 
         public frmMain()
         {
@@ -131,10 +133,14 @@ namespace Keithley2461
             string[] arrIVData = strIVData.Split(',');
 
             //Finds the number of IV entires in the data
-            int intNumberOfEntries = arrIVData.Length / 2;
+            intNumberOfEntries = arrIVData.Length / 2;
 
             //Creates the IV curve array
             var npIVCurve = np.zeros(2, intNumberOfEntries+1);
+
+            //Copies array into global array
+            arrData = npIVCurve;
+
 
             //Loops through the string, parsing the data as we go along
             for (int i = 0; i < intNumberOfEntries; i++)
@@ -228,11 +234,6 @@ namespace Keithley2461
             //Appends file data
             File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", DataAppend.ToString());
 
-            
-            
-
-
-
             //=====================================
             //Export to CSV and JPG
             //=====================================
@@ -276,6 +277,88 @@ namespace Keithley2461
 
         private void txtRsCalculateHigh_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnReDoAnalysis_Click(object sender, EventArgs e)
+        {
+            double k = 1.3806488 * Math.Pow(10, -23); //units = J/K
+            double q = 1.602 * Math.Pow(10, -19); //units = coulomb
+            double T = Convert.ToDouble(txtTemp.Text) + 273.15; //converts temperature from degC to deg K
+            int n = Convert.ToInt16(txtNCells.Text); //number of cells in the module
+            double Ilow = Convert.ToDouble(txtRsCalculateLow.Text); //Low current to use to calculate the Rs
+            double Ihigh = Convert.ToDouble(txtRsCalculateHigh.Text);//High current to use to calculate the Rs
+            double Iavg = (Ilow + Ihigh) / 2; //Iaverage to use to calculate the Rs
+            double Vlow = -1;
+            double Vhigh = -1;
+
+            //=====================================
+            //Calculate Rs
+            //=====================================
+            for (int i = 0; i < intNumberOfEntries; i++)
+            {
+                //Find Ilow
+                if (Convert.ToDouble(arrData[1, i]) == Ilow)
+                {
+                    Vlow = Convert.ToDouble(arrData[2, i]);
+
+                }
+                else if ((Convert.ToDouble(arrData[1, i]) < Ilow) && (Convert.ToDouble(arrData[1, i + 1]) > Ilow))
+                {
+                    double slope = ((Convert.ToDouble(arrData[2, i + 1]) - Convert.ToDouble(arrData[2, i])) / (Convert.ToDouble(arrData[1, i + 1]) - Convert.ToDouble(arrData[1, i])));
+                    Vlow = slope * Ilow + Convert.ToDouble(arrData[2, i]);
+                }
+
+                //Find Ihigh
+                if (Convert.ToDouble(arrData[1, i]) == Ihigh)
+                {
+                    Vhigh = Convert.ToDouble(arrData[2, i]);
+
+                }
+                else if ((Convert.ToDouble(arrData[1, i]) < Ihigh) && (Convert.ToDouble(arrData[1, i + 1]) > Ihigh))
+                {
+                    double slope = ((Convert.ToDouble(arrData[2, i + 1]) - Convert.ToDouble(arrData[2, i])) / (Convert.ToDouble(arrData[1, i + 1]) - Convert.ToDouble(arrData[1, i])));
+                    Vhigh = slope * Ihigh + Convert.ToDouble(arrData[2, i]);
+                }
+
+
+
+            }
+
+            //Calculate Rs
+            double Rs = (Vhigh - Vlow) / (Ihigh - Ilow) - (n * k * T) / (q * Iavg);
+            lblRsEstimate.Text = Math.Round(Rs, 4).ToString();
+
+            //=====================================
+            //Write Rs File
+            //=====================================
+
+            var RsTitle = new StringBuilder();
+            var DataAppend = new StringBuilder();
+
+            var header = "Date time, Series Resistance (Ohms), Bias limit, Bias voltage, Delay, Limit Value, N cells, Number of Pulses, Off Time, " +
+                "Pulse Width, RsCalculateHigh, RsCalculateLow, Sample Name, Start Value, Stop Value, Temperature, Timeout";
+            string timestamp = DateTime.Now.ToString();
+
+            var txtAppend = timestamp + ", " + lblRsEstimate.Text + ", " + txtBiasLimit.Text + ", " + txtBiasVoltage.Text + ", " + txtDelay.Text + ", " +
+                txtLimitValue.Text + ", " + txtNCells.Text + ", " + txtNumberPulses.Text + ", " + txtOffTime.Text + ", " +
+                txtPulseWidth.Text + ", " + txtRsCalculateHigh.Text + ", " + txtRsCalculateLow.Text + ", " +
+                txtSampleName.Text + ", " + txtStartValue.Text + ", " + txtStopValue.Text + ", " + txtTemp.Text + ", " +
+                txtTimeOut.Text + "\n";
+
+            RsTitle.AppendLine(header);
+            DataAppend.Append(txtAppend);
+
+            //Checks to see if the file already exist
+            if (File.Exists(txtFilePath.Text + "Keithley2461_FileOutput.csv") == false)
+            {
+                //Creates the file header
+                File.WriteAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", RsTitle.ToString());
+
+            }
+
+            //Appends file data
+            File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", DataAppend.ToString());
 
         }
     }

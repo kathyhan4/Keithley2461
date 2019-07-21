@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.lblIDN = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnReDoAnalysis = new System.Windows.Forms.Button();
@@ -137,6 +137,7 @@
             this.btnReDoAnalysis.TabIndex = 113;
             this.btnReDoAnalysis.Text = " Re-Do Analysis";
             this.btnReDoAnalysis.UseVisualStyleBackColor = true;
+            this.btnReDoAnalysis.Click += new System.EventHandler(this.btnReDoAnalysis_Click);
             // 
             // btnRunSweep
             // 
@@ -710,10 +711,10 @@
             // 
             // chtIVCurve
             // 
-            chartArea1.Name = "chtIVCurve";
-            this.chtIVCurve.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtIVCurve.Legends.Add(legend1);
+            chartArea2.Name = "chtIVCurve";
+            this.chtIVCurve.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtIVCurve.Legends.Add(legend2);
             this.chtIVCurve.Location = new System.Drawing.Point(571, 160);
             this.chtIVCurve.Name = "chtIVCurve";
             this.chtIVCurve.Size = new System.Drawing.Size(610, 397);
