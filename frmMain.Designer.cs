@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.lblIDN = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnReDoAnalysis = new System.Windows.Forms.Button();
@@ -230,9 +230,9 @@
             this.lblRshEstimate.AutoSize = true;
             this.lblRshEstimate.Location = new System.Drawing.Point(417, 472);
             this.lblRshEstimate.Name = "lblRshEstimate";
-            this.lblRshEstimate.Size = new System.Drawing.Size(83, 17);
+            this.lblRshEstimate.Size = new System.Drawing.Size(90, 17);
             this.lblRshEstimate.TabIndex = 103;
-            this.lblRshEstimate.Text = "No estimate";
+            this.lblRshEstimate.Text = "Coming soon";
             // 
             // lblRsEstimate
             // 
@@ -272,6 +272,7 @@
             // 
             // txtRshCalculateLow
             // 
+            this.txtRshCalculateLow.Enabled = false;
             this.txtRshCalculateLow.Location = new System.Drawing.Point(419, 417);
             this.txtRshCalculateLow.Name = "txtRshCalculateLow";
             this.txtRshCalculateLow.Size = new System.Drawing.Size(37, 22);
@@ -280,6 +281,7 @@
             // 
             // txtRshCalculateHigh
             // 
+            this.txtRshCalculateHigh.Enabled = false;
             this.txtRshCalculateHigh.Location = new System.Drawing.Point(419, 439);
             this.txtRshCalculateHigh.Name = "txtRshCalculateHigh";
             this.txtRshCalculateHigh.Size = new System.Drawing.Size(37, 22);
@@ -711,10 +713,10 @@
             // 
             // chtIVCurve
             // 
-            chartArea2.Name = "chtIVCurve";
-            this.chtIVCurve.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtIVCurve.Legends.Add(legend2);
+            chartArea1.Name = "chtIVCurve";
+            this.chtIVCurve.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtIVCurve.Legends.Add(legend1);
             this.chtIVCurve.Location = new System.Drawing.Point(571, 160);
             this.chtIVCurve.Name = "chtIVCurve";
             this.chtIVCurve.Size = new System.Drawing.Size(610, 397);
