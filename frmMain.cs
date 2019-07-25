@@ -50,7 +50,7 @@ namespace Keithley2461
                 else if ((Convert.ToDouble(arrData[1, i]) < Ilow) && (Convert.ToDouble(arrData[1, i + 1]) > Ilow))
                 {
                     double slope = ((Convert.ToDouble(arrData[2, i + 1]) - Convert.ToDouble(arrData[2, i])) / (Convert.ToDouble(arrData[1, i + 1]) - Convert.ToDouble(arrData[1, i])));
-                    Vlow = slope * Ilow + Convert.ToDouble(arrData[2, i]);
+                    Vlow = slope * (Ilow - Convert.ToDouble(arrData[1, i])) + Convert.ToDouble(arrData[2, i]);
                 }
 
                 //Find Ihigh
@@ -62,7 +62,7 @@ namespace Keithley2461
                 else if ((Convert.ToDouble(arrData[1, i]) < Ihigh) && (Convert.ToDouble(arrData[1, i + 1]) > Ihigh))
                 {
                     double slope = ((Convert.ToDouble(arrData[2, i + 1]) - Convert.ToDouble(arrData[2, i])) / (Convert.ToDouble(arrData[1, i + 1]) - Convert.ToDouble(arrData[1, i])));
-                    Vhigh = slope * Ihigh + Convert.ToDouble(arrData[2, i]);
+                    Vhigh = slope * (Ihigh - Convert.ToDouble(arrData[1, i])) + Convert.ToDouble(arrData[2, i]);
                 }
 
 
@@ -70,7 +70,7 @@ namespace Keithley2461
             }
 
             //Calculate Rs
-            double Rs = (Vhigh - Vlow) / (Ihigh - Ilow) - (n * k * T) / (q * Iavg);
+            double Rs = (Vhigh - Vlow) / (Ihigh - Ilow) - (Convert.ToDouble(n) * k * T) / (q * Iavg);
             lblRsEstimate.Text = Math.Round(Rs, 4).ToString();
 
             //=====================================
@@ -94,15 +94,15 @@ namespace Keithley2461
             DataAppend.Append(txtAppend);
 
             //Checks to see if the file already exist
-            if (File.Exists(txtFilePath.Text + "Keithley2461_FileOutput.txt") == false)
+            if (File.Exists(txtFilePath.Text + "Keithley2461_FileOutput.csv") == false)
             {
                 //Creates the file header
-                File.WriteAllText(txtFilePath.Text + "Keithley2461_FileOutput.txt", RsTitle.ToString());
+                File.WriteAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", RsTitle.ToString());
 
             }
 
             //Appends file data
-            File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.txt", DataAppend.ToString());
+            File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", DataAppend.ToString());
         }
 
 
