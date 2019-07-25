@@ -80,29 +80,29 @@ namespace Keithley2461
             var RsTitle = new StringBuilder();
             var DataAppend = new StringBuilder();
 
-            var header = "Date time, Series Resistance (Ohms), Bias limit, Bias voltage, Delay, Limit Value, N cells, Number of Pulses, Off Time, " +
-                "Pulse Width, RsCalculateHigh, RsCalculateLow, Sample Name, Start Value, Stop Value, Temperature, Timeout";
+            var header = "Sample Name, Date time, Series Resistance (Ohms), Bias limit, Bias voltage, Delay, Limit Value, N cells, Number of Pulses, Off Time, " +
+                "Pulse Width, RsCalculateHigh, RsCalculateLow, Start Value, Stop Value, Temperature, Timeout";
             string timestamp = DateTime.Now.ToString();
 
-            var txtAppend = timestamp + ", " + lblRsEstimate.Text + ", " + txtBiasLimit.Text + ", " + txtBiasVoltage.Text + ", " + txtDelay.Text + ", " +
+            var txtAppend = txtSampleName.Text + ", " + timestamp + ", " + lblRsEstimate.Text + ", " + txtBiasLimit.Text + ", " + txtBiasVoltage.Text + ", " + txtDelay.Text + ", " +
                 txtLimitValue.Text + ", " + txtNCells.Text + ", " + txtNumberPulses.Text + ", " + txtOffTime.Text + ", " +
                 txtPulseWidth.Text + ", " + txtRsCalculateHigh.Text + ", " + txtRsCalculateLow.Text + ", " +
-                txtSampleName.Text + ", " + txtStartValue.Text + ", " + txtStopValue.Text + ", " + txtTemp.Text + ", " +
+                txtStartValue.Text + ", " + txtStopValue.Text + ", " + txtTemp.Text + ", " +
                 txtTimeOut.Text + "\n";
 
             RsTitle.AppendLine(header);
             DataAppend.Append(txtAppend);
 
             //Checks to see if the file already exist
-            if (File.Exists(txtFilePath.Text + "Keithley2461_FileOutput.csv") == false)
+            if (File.Exists(txtFilePath.Text + "Keithley2461_FileOutput.txt") == false)
             {
                 //Creates the file header
-                File.WriteAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", RsTitle.ToString());
+                File.WriteAllText(txtFilePath.Text + "Keithley2461_FileOutput.txt", RsTitle.ToString());
 
             }
 
             //Appends file data
-            File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.csv", DataAppend.ToString());
+            File.AppendAllText(txtFilePath.Text + "Keithley2461_FileOutput.txt", DataAppend.ToString());
         }
 
 
@@ -116,7 +116,7 @@ namespace Keithley2461
             //=====================================
             //Performs sweep and gets data back
             //=====================================
-            string resourceName = "USB0::0x05E6::0x2461::04403896::INSTR"; // See NI MAX for resource name
+            string resourceName = "USB0::0x05E6::0x2461::04426136::INSTR"; // See NI MAX for resource name
             string sourcename = "";
             string measurename = "";
             double k = 1.3806488 * Math.Pow(10, -23); //units = J/K
