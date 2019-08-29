@@ -116,7 +116,7 @@ namespace Keithley2461
             //=====================================
             //Performs sweep and gets data back
             //=====================================
-            string resourceName = "USB0::0x05E6::0x2461::04426136::INSTR"; // See NI MAX for resource name
+            string resourceName = "USB0::0x05E6::0x2461::04403896::INSTR"; // See NI MAX for resource name
             string sourcename = "";
             string measurename = "";
             double k = 1.3806488 * Math.Pow(10, -23); //units = J/K
